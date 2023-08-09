@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Notes</title>
+</head>
+<body>
+<div class="container">
+    <div class="row pt-4 mb-4">
+        <div class="col-6">
+            <div class="col-4 notes-counter text-center">
+                <span class="count-numbers d-inline-block" th:text="${notesList.size()}"></span>
+                <span class="count-name d-inline-block">notes</span>
+            </div>
+        </div>
+        <div class="col-6 justify-content-center text-center">
+            <form th:action="@{/note/list}" method="post" class="create-note-form px-5">
+                <h5>Fill the form to add a new note</h5>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Note title" required>
+                    <label for="title">Title</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" name="content" id="content" placeholder="Note content" required></textarea>
+                    <label for="content">Content</label>
+                </div>
+                <div class="d-grid justify-content-md-end">
+                    <button type="submit" class="btn btn-outline-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" th:each="note : ${notesList}">
+            <div class="card mb-3">
+                <div class="card-header bg-transparent border-0" th:text="'Title: ' + ${note.title}"></div>
+                <div class="card-body">
+                    <p class="card-text" th:text="'Content: ' + ${note.content}"></p>
+                </div>
+                <div class="card-footer bg-transparent pt-4">
+                    <form th:action="@{/note/edit}" method="get" class="d-inline-block">
+                        <input type="hidden" name="id" th:value="${note.id}">
+                        <button type="submit" class="btn btn-outline-secondary">Edit</button>
+                    </form>
+                    <form th:action="@{/note/delete}" method="post" class="d-inline-block">
+                        <input type="hidden" name="id" th:value="${note.id}">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

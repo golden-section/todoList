@@ -5,14 +5,14 @@ import org.gs.todoList.entity.Note;
 import org.gs.todoList.exception.NoteNotFoundException;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class NoteService {
 
-    private final Map<Long, Note> noteList = new HashMap<>();
+    private final Map<Long, Note> noteList = new LinkedHashMap<>();
 
     public List<Note> listAll() {
         return noteList.values().stream().toList();

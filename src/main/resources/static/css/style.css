@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body {
+font-family: 'Lato', sans-serif;
+    color: #4a4a4a;
+}
+
+.notes-counter,
+.create-note-form,
+.edit-note-form,
+.card {
+    box-shadow: 2px 2px 10px #dadada;
+    margin: 5px;
+    padding: 20px 10px;
+    border-radius: 5px;
+}
+
+.notes-counter:hover,
+.create-note-form:hover,
+.edit-note-form:hover,
+.card:hover {
+    box-shadow: 4px 4px 20px #dadada;
+    transition: .3s linear all;
+}
+
+.notes-counter .count-numbers {
+    font-size: 2rem;
+}
+
+.card {
+    background: #f0f8ff;
+}
