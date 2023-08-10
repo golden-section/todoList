@@ -22,11 +22,11 @@
             <form th:action="@{/note/list}" method="post" class="create-note-form px-5">
                 <h5>Fill the form to add a new note</h5>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="title" id="title" placeholder="Note title" required>
+                    <input type="text" class="form-control" name="title" id="title" minlength="3" maxlength="255" placeholder="Note title" required>
                     <label for="title">Title</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" name="content" id="content" placeholder="Note content" required></textarea>
+                    <textarea class="form-control" name="content" id="content" maxlength="2000" placeholder="Note content" required></textarea>
                     <label for="content">Content</label>
                 </div>
                 <div class="d-grid justify-content-md-end">

@@ -1,33 +1,31 @@
 package org.gs.todoList.service;
 
 import lombok.SneakyThrows;
-import org.gs.todoList.entity.Note;
+import org.gs.todoList.data.entity.Note;
+import org.gs.todoList.data.repository.NoteRepository;
 import org.gs.todoList.exception.NoteNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class NoteService {
 
-    private final Map<Long, Note> noteList = new LinkedHashMap<>();
+    @Autowired
+    private NoteRepository noteRepository;
 
     public List<Note> listAll() {
-        return noteList.values().stream().toList();
+        return noteRepository.findAll();
     }
 
     public Note add(Note note) {
-        note.setId(LocalDateTime.now().hashCode());
-        noteList.putIfAbsent(note.getId(), note);
-        return note;
+        return noteRepository.save(note);
     }
 
     @SneakyThrows
     public Note getById(long id)  {
-        if(noteList.containsKey(id)) {
-            return noteList.get(id);
+        if(noteRepository.existsById(id)) {
+            return noteRepository.getReferenceById(id);
         } else {
             throw new NoteNotFoundException(id);
         }
@@ -35,8 +33,8 @@ public class NoteService {
 
     @SneakyThrows
     public void update(Note note) {
-        if(noteList.containsKey(note.getId())) {
-            noteList.put(note.getId(), note);
+        if(noteRepository.existsById(note.getId())) {
+            noteRepository.save(note);
         } else {
             throw new NoteNotFoundException(note.getId());
         }
@@ -44,8 +42,8 @@ public class NoteService {
 
     @SneakyThrows
     public void deleteById(long id) {
-        if(noteList.containsKey(id)) {
-            noteList.remove(id);
+        if(noteRepository.existsById(id)) {
+            noteRepository.deleteById(id);
         } else {
             throw new NoteNotFoundException(id);
         }

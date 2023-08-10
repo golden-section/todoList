@@ -1,7 +1,7 @@
 package org.gs.todoList.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.gs.todoList.entity.Note;
+import org.gs.todoList.data.entity.Note;
 import org.gs.todoList.service.NoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
