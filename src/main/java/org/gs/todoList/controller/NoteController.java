@@ -22,7 +22,7 @@ public class NoteController {
         return result;
     }
 
-    @PostMapping("/list")
+    @PostMapping("/add")
     public RedirectView addNote(@ModelAttribute Note note) {
         noteService.add(note);
         return new RedirectView("/note/list");
